@@ -1,0 +1,6 @@
+{
+  "submodules": [
+    "audit_renewal",
+    "certification_registry"
+  ]
+}

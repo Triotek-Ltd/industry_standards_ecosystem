@@ -1,0 +1,27 @@
+{
+  "doc_key": "association_membership",
+  "doc_title": "Association Membership",
+  "doc_kind": "master",
+  "status": "draft",
+  "module_id": "industry_associations",
+  "submodule_id": "membership_registry",
+  "app_id": "industry_standards_ecosystem",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "master",
+  "classification": {
+    "archetype": "master",
+    "bundle": "ecosystem"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "ecosystem",
+    "app": "industry_standards_ecosystem",
+    "module": "industry_associations",
+    "submodule": "membership_registry",
+    "reference_doc_id": "association_membership",
+    "evidence_gaps": [
+      "membership-level hierarchy",
+      "representative-role capture"
+    ]
+  }
+}

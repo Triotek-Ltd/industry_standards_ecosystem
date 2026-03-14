@@ -1,0 +1,6 @@
+{
+  "submodules": [
+    "membership_registry",
+    "participation_tracking"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "doc_key": "participation_event",
+  "doc_title": "Participation Event",
+  "doc_kind": "event",
+  "status": "draft",
+  "module_id": "industry_associations",
+  "submodule_id": "participation_tracking",
+  "app_id": "industry_standards_ecosystem",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "event",
+  "classification": {
+    "archetype": "event",
+    "bundle": "ecosystem"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "ecosystem",
+    "app": "industry_standards_ecosystem",
+    "module": "industry_associations",
+    "submodule": "participation_tracking",
+    "reference_doc_id": "participation_event",
+    "evidence_gaps": [
+      "committee/conference taxonomy",
+      "outcome-capture model"
+    ]
+  }
+}

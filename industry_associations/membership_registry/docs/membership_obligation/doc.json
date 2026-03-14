@@ -1,0 +1,27 @@
+{
+  "doc_key": "membership_obligation",
+  "doc_title": "Membership Obligation",
+  "doc_kind": "transaction",
+  "status": "draft",
+  "module_id": "industry_associations",
+  "submodule_id": "membership_registry",
+  "app_id": "industry_standards_ecosystem",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "transaction",
+  "classification": {
+    "archetype": "transaction",
+    "bundle": "ecosystem"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "ecosystem",
+    "app": "industry_standards_ecosystem",
+    "module": "industry_associations",
+    "submodule": "membership_registry",
+    "reference_doc_id": "membership_obligation",
+    "evidence_gaps": [
+      "obligation taxonomy",
+      "reminder/escalation rules"
+    ]
+  }
+}

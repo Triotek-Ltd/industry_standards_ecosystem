@@ -1,0 +1,8 @@
+{
+  "id": "industry_associations",
+  "title": "Industry Associations",
+  "app_id": "industry_standards_ecosystem",
+  "type": "module",
+  "status": "draft",
+  "supports_submodules": true
+}

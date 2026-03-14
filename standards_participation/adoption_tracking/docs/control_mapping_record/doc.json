@@ -1,0 +1,27 @@
+{
+  "doc_key": "control_mapping_record",
+  "doc_title": "Control Mapping Record",
+  "doc_kind": "transaction",
+  "status": "draft",
+  "module_id": "standards_participation",
+  "submodule_id": "adoption_tracking",
+  "app_id": "industry_standards_ecosystem",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "transaction",
+  "classification": {
+    "archetype": "transaction",
+    "bundle": "ecosystem"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "ecosystem",
+    "app": "industry_standards_ecosystem",
+    "module": "standards_participation",
+    "submodule": "adoption_tracking",
+    "reference_doc_id": "control_mapping_record",
+    "evidence_gaps": [
+      "mapping-granularity model",
+      "evidence linkage rules"
+    ]
+  }
+}

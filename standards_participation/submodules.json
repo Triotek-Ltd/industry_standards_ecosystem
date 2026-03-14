@@ -1,0 +1,6 @@
+{
+  "submodules": [
+    "adoption_tracking",
+    "standards_registry"
+  ]
+}

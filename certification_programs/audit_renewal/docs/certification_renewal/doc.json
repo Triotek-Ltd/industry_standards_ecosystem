@@ -1,0 +1,27 @@
+{
+  "doc_key": "certification_renewal",
+  "doc_title": "Certification Renewal",
+  "doc_kind": "transaction",
+  "status": "draft",
+  "module_id": "certification_programs",
+  "submodule_id": "audit_renewal",
+  "app_id": "industry_standards_ecosystem",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "transaction",
+  "classification": {
+    "archetype": "transaction",
+    "bundle": "ecosystem"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "ecosystem",
+    "app": "industry_standards_ecosystem",
+    "module": "certification_programs",
+    "submodule": "audit_renewal",
+    "reference_doc_id": "certification_renewal",
+    "evidence_gaps": [
+      "renewal package contents",
+      "grace-period rules"
+    ]
+  }
+}
