@@ -8,7 +8,7 @@ ACTION_ID = "schedule"
 ACTION_RULE = {'allowed_in_states': ['opened', 'scheduled', 'in_progress', 'completed'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['certification_record', 'certification_renewal', 'audit_engagement'], 'borrowed_fields': ['certification identity', 'scope from certification_record'], 'inferred_roles': ['auditor', 'case owner']}, 'actors': ['auditor', 'case owner'], 'action_actors': {'create': ['auditor'], 'assign': ['auditor'], 'close': ['case owner'], 'archive': ['case owner']}}
 
 def handle_schedule(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

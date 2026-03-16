@@ -11,7 +11,7 @@ TERMINAL_STATES = ['archived']
 ACTION_RULES = {'create': {'allowed_in_states': ['prepared', 'submitted', 'approved', 'rejected', 'renewed'], 'transitions_to': None}, 'prepare': {'allowed_in_states': ['prepared', 'submitted', 'approved', 'rejected', 'renewed'], 'transitions_to': None}, 'submit': {'allowed_in_states': ['prepared', 'submitted', 'approved', 'rejected', 'renewed'], 'transitions_to': 'submitted'}, 'approve': {'allowed_in_states': ['prepared', 'submitted', 'approved', 'rejected', 'renewed'], 'transitions_to': 'approved'}, 'reject': {'allowed_in_states': ['prepared', 'submitted', 'approved', 'rejected', 'renewed'], 'transitions_to': 'rejected'}, 'archive': {'allowed_in_states': ['prepared', 'submitted', 'approved', 'rejected', 'renewed'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['certification_record', 'certification_audit_case'], 'borrowed_fields': ['certification', 'expiry context from certification_record'], 'inferred_roles': ['auditor', 'case owner']}, 'actors': ['auditor', 'case owner'], 'action_actors': {'create': ['auditor'], 'submit': ['auditor'], 'approve': ['case owner'], 'reject': ['case owner'], 'archive': ['case owner']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

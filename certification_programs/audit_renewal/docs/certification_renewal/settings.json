@@ -25,7 +25,20 @@
       "show_in_related_panel": true
     }
   ],
-  "lookup_rules": [],
+  "lookup_rules": [
+    {
+      "field_id": "related_certification_record",
+      "doc_id": "certification_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_certification_audit_case",
+      "doc_id": "certification_audit_case",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
   "fetch_rules": [],
   "reference_map": {
     "primary_reference_field": "reference_no",
@@ -33,7 +46,10 @@
   },
   "relation_rules": {
     "parent_doc": null,
-    "child_docs": [],
+    "child_docs": [
+      "certification_record",
+      "certification_audit_case"
+    ],
     "show_related_panel": true
   },
   "borrowed_fields": [
@@ -57,6 +73,44 @@
   "runtime_hints": {
     "doc_key": "certification_renewal",
     "supports_related_lookup": true,
-    "supports_fetch_rules": true
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "relation_context": {
+        "related_docs": [
+          "certification_record",
+          "certification_audit_case"
+        ],
+        "borrowed_fields": [
+          "certification",
+          "expiry context from certification_record"
+        ],
+        "inferred_roles": [
+          "auditor",
+          "case owner"
+        ]
+      },
+      "actors": [
+        "auditor",
+        "case owner"
+      ],
+      "action_actors": {
+        "create": [
+          "auditor"
+        ],
+        "submit": [
+          "auditor"
+        ],
+        "approve": [
+          "case owner"
+        ],
+        "reject": [
+          "case owner"
+        ],
+        "archive": [
+          "case owner"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
   }
 }

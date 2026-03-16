@@ -68,7 +68,10 @@
         "renewal_period",
         "renewal_outcome"
       ],
-      "relations": [],
+      "relations": [
+        "related_certification_record",
+        "related_certification_audit_case"
+      ],
       "amounts": [
         "currency",
         "total_amount"
@@ -437,6 +440,54 @@
           "filterable": true,
           "sortable": true
         }
+      },
+      {
+        "field_id": "related_certification_record",
+        "label": "Related Certification Record",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "certification_record",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_certification_audit_case",
+        "label": "Related Certification Audit Case",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "certification_audit_case",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
       }
     ],
     "title_field": "title",
@@ -547,16 +598,32 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
-          "record",
-          "review",
-          "assign",
-          "track",
-          "monitor",
-          "confirm",
+          "create",
+          "prepare",
+          "submit",
+          "approve",
+          "reject",
+          "archive"
+        ]
+      },
+      {
+        "role_id": "auditor",
+        "actions": [
+          "view",
+          "list",
+          "create",
+          "submit"
+        ]
+      },
+      {
+        "role_id": "case owner",
+        "actions": [
+          "view",
+          "list",
+          "approve",
+          "reject",
           "archive"
         ]
       }
@@ -636,7 +703,20 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_certification_record",
+        "doc_id": "certification_record",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_certification_audit_case",
+        "doc_id": "certification_audit_case",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -644,7 +724,10 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "certification_record",
+        "certification_audit_case"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [
@@ -668,7 +751,45 @@
     "runtime_hints": {
       "doc_key": "certification_renewal",
       "supports_related_lookup": true,
-      "supports_fetch_rules": true
+      "supports_fetch_rules": true,
+      "workflow_hints": {
+        "relation_context": {
+          "related_docs": [
+            "certification_record",
+            "certification_audit_case"
+          ],
+          "borrowed_fields": [
+            "certification",
+            "expiry context from certification_record"
+          ],
+          "inferred_roles": [
+            "auditor",
+            "case owner"
+          ]
+        },
+        "actors": [
+          "auditor",
+          "case owner"
+        ],
+        "action_actors": {
+          "create": [
+            "auditor"
+          ],
+          "submit": [
+            "auditor"
+          ],
+          "approve": [
+            "case owner"
+          ],
+          "reject": [
+            "case owner"
+          ],
+          "archive": [
+            "case owner"
+          ]
+        }
+      },
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -748,6 +869,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -766,6 +890,49 @@
       "doc_kind": "transaction"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/industry_standards_ecosystem/certification_programs/audit_renewal/certification_renewal/",
+    "status_field": "workflow_state",
+    "initial_state": "prepared",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "transaction_date"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "submit",
+        "source_state": "prepared",
+        "target_state": "submitted",
+        "disallowed_state": "archived"
+      },
+      {
+        "action_id": "approve",
+        "source_state": "prepared",
+        "target_state": "approved",
+        "disallowed_state": "archived"
+      },
+      {
+        "action_id": "reject",
+        "source_state": "prepared",
+        "target_state": "rejected",
+        "disallowed_state": "archived"
+      },
+      {
+        "action_id": "archive",
+        "source_state": "prepared",
+        "target_state": "archived",
+        "disallowed_state": "archived"
+      }
+    ],
+    "related_docs": [
+      "certification_record",
+      "certification_audit_case"
+    ],
+    "downstream_effects": [],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -773,7 +940,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

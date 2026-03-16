@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'event_schedule', 'supports_timing': True}, 'reporting_profile': {'supports_snapshots': True, 'supports_outputs': False}, 'integration_profile': {'external_sync_enabled': False}, 'lifecycle_states': ['planned', 'completed', 'archived'], 'is_transactional': False}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'start_at': 'event_start', 'end_at': 'event_end', 'event_date': 'schedule_marker'}, 'search_fields': ['title', 'reference_no', 'description', 'event_code', 'source_membership', 'event_type'], 'list_columns': ['title', 'start_at', 'end_at', 'workflow_state'], 'initial_state': 'planned', 'lifecycle_states': ['planned', 'completed', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'schedule': None, 'complete': None, 'archive': 'archived'}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'start_at': 'event_start', 'end_at': 'event_end', 'event_date': 'schedule_marker', 'related_association_membership': 'relation_collection', 'related_membership_obligation': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'event_code', 'source_membership', 'event_type'], 'list_columns': ['title', 'start_at', 'end_at', 'workflow_state'], 'initial_state': 'planned', 'lifecycle_states': ['planned', 'completed', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'schedule': None, 'complete': None, 'archive': 'archived'}}
 
 WORKFLOW_HINTS = {}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': [], 'related_docs': ['association_membership', 'membership_obligation'], 'action_targets': {'create': None, 'schedule': None, 'complete': None, 'archive': 'archived'}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "participation_event"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

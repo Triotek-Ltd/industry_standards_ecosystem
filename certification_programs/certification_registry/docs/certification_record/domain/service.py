@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'entity_lifecycle', 'case_management': False}, 'reporting_profile': {'supports_snapshots': False, 'supports_outputs': False}, 'integration_profile': {'external_sync_enabled': False}, 'lifecycle_states': ['active', 'suspended', 'expired', 'archived'], 'is_transactional': False}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'issue_date': 'schedule_marker', 'expiry_date': 'schedule_marker'}, 'search_fields': ['title', 'reference_no', 'description', 'certification_code', 'certification_identity', 'issuing_body'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'active', 'lifecycle_states': ['active', 'suspended', 'expired', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'update': None, 'renew': None, 'suspend': None, 'archive': 'archived'}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'issue_date': 'schedule_marker', 'expiry_date': 'schedule_marker', 'related_certification_audit_case': 'relation_collection', 'related_certification_renewal': 'relation_collection', 'related_standards_adoption_case': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'certification_code', 'certification_identity', 'issuing_body'], 'list_columns': ['title', 'reference_no', 'workflow_state', 'modified'], 'initial_state': 'active', 'lifecycle_states': ['active', 'suspended', 'expired', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'update': None, 'renew': None, 'suspend': None, 'archive': 'archived'}}
 
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['certification_audit_case', 'certification_renewal', 'standards_adoption_case'], 'borrowed_fields': ['certification-program context from standards/adoption docs where linked'], 'inferred_roles': ['auditor', 'case owner']}, 'actors': ['auditor', 'case owner'], 'action_actors': {'create': ['auditor'], 'update': ['auditor'], 'archive': ['case owner']}}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': [], 'related_docs': ['certification_audit_case', 'certification_renewal', 'standards_adoption_case'], 'action_targets': {'create': None, 'update': None, 'renew': None, 'suspend': None, 'archive': 'archived'}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "certification_record"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

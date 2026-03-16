@@ -8,7 +8,7 @@ ACTION_ID = "suspend"
 ACTION_RULE = {'allowed_in_states': ['active', 'suspended', 'expired'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['certification_audit_case', 'certification_renewal', 'standards_adoption_case'], 'borrowed_fields': ['certification-program context from standards/adoption docs where linked'], 'inferred_roles': ['auditor', 'case owner']}, 'actors': ['auditor', 'case owner'], 'action_actors': {'create': ['auditor'], 'update': ['auditor'], 'archive': ['case owner']}}
 
 def handle_suspend(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

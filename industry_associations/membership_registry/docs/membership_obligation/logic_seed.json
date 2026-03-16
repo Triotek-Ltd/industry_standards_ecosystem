@@ -68,7 +68,10 @@
       "currency": "currency_code",
       "total_amount": "total_amount",
       "due_date": "schedule_marker",
-      "obligation_status": "status_flag"
+      "obligation_status": "status_flag",
+      "related_association_membership": "relation_collection",
+      "related_participation_event": "relation_collection",
+      "related_government_report": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -109,6 +112,8 @@
     }
   },
   "workflow_hints": {},
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "association_membership",
     "participation_event",

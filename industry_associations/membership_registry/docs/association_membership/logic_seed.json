@@ -56,7 +56,9 @@
     "field_purposes": {
       "workflow_state": "lifecycle_state",
       "start_date": "schedule_marker",
-      "renewal_expiry_date": "schedule_marker"
+      "renewal_expiry_date": "schedule_marker",
+      "related_membership_obligation": "relation_collection",
+      "related_participation_event": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -91,6 +93,8 @@
     }
   },
   "workflow_hints": {},
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "membership_obligation",
     "participation_event"

@@ -11,7 +11,7 @@ TERMINAL_STATES = ['closed', 'archived']
 ACTION_RULES = {'create': {'allowed_in_states': ['opened', 'scheduled', 'in_progress', 'completed'], 'transitions_to': None}, 'schedule': {'allowed_in_states': ['opened', 'scheduled', 'in_progress', 'completed'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['opened', 'scheduled', 'in_progress', 'completed'], 'transitions_to': 'in_progress'}, 'complete': {'allowed_in_states': ['opened', 'scheduled', 'in_progress', 'completed'], 'transitions_to': None}, 'close': {'allowed_in_states': ['opened', 'scheduled', 'in_progress', 'completed'], 'transitions_to': 'closed'}, 'archive': {'allowed_in_states': ['opened', 'scheduled', 'in_progress', 'completed'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['certification_record', 'certification_renewal', 'audit_engagement'], 'borrowed_fields': ['certification identity', 'scope from certification_record'], 'inferred_roles': ['auditor', 'case owner']}, 'actors': ['auditor', 'case owner'], 'action_actors': {'create': ['auditor'], 'assign': ['auditor'], 'close': ['case owner'], 'archive': ['case owner']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

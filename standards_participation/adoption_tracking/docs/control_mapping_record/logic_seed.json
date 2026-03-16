@@ -59,7 +59,11 @@
       "transaction_date": "transaction_date",
       "party": "primary_party",
       "currency": "currency_code",
-      "total_amount": "total_amount"
+      "total_amount": "total_amount",
+      "related_standards_requirement": "relation_collection",
+      "related_standards_adoption_case": "relation_collection",
+      "related_policy_document": "relation_collection",
+      "related_compliance_record": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -94,7 +98,44 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {},
+  "workflow_hints": {
+    "relation_context": {
+      "related_docs": [
+        "standards_requirement",
+        "standards_adoption_case",
+        "policy_document",
+        "compliance_record"
+      ],
+      "borrowed_fields": [
+        "requirement context from standards_requirement",
+        "control references from internal policy/compliance docs"
+      ],
+      "inferred_roles": [
+        "compliance officer",
+        "case owner"
+      ]
+    },
+    "actors": [
+      "compliance officer",
+      "case owner"
+    ],
+    "action_actors": {
+      "create": [
+        "compliance officer"
+      ],
+      "review": [
+        "case owner"
+      ],
+      "confirm": [
+        "compliance officer"
+      ],
+      "archive": [
+        "case owner"
+      ]
+    }
+  },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "standards_requirement",
     "standards_adoption_case",

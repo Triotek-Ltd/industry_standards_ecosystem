@@ -8,7 +8,7 @@ ACTION_ID = "defer"
 ACTION_RULE = {'allowed_in_states': ['opened', 'in_progress', 'implemented', 'deferred'], 'transitions_to': None}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['standards_requirement', 'control_mapping_record', 'certification_record'], 'borrowed_fields': ['requirement identity', 'applicability from standards_requirement'], 'inferred_roles': ['case owner']}, 'actors': ['case owner'], 'action_actors': {'create': ['case owner'], 'assign': ['case owner'], 'close': ['case owner'], 'archive': ['case owner']}}
 
 def handle_defer(payload: dict, context: dict | None = None) -> dict:
     context = context or {}
