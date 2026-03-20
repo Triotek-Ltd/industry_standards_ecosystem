@@ -4,5 +4,586 @@
   "app_id": "industry_standards_ecosystem",
   "type": "module",
   "status": "draft",
-  "supports_submodules": true
+  "supports_submodules": true,
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "module",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "docs",
+      "flatten_submodules_in_ui": true
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Standards Participation KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "standards_participation",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Standards Participation summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "standards_participation",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Standards Participation charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "standards_participation",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "standards_participation_trend_line",
+            "label": "Standards Participation trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "standards_participation_volume_column",
+            "label": "Standards Participation volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "standards_participation_distribution_donut",
+            "label": "Standards Participation distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "control_mapping_record_trend_line",
+            "label": "Control Mapping Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "control_mapping_record_volume_column",
+            "label": "Control Mapping Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "control_mapping_record_distribution_donut",
+            "label": "Control Mapping Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "standards_adoption_case_trend_line",
+            "label": "Standards Adoption Case trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "standards_adoption_case_volume_column",
+            "label": "Standards Adoption Case volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "standards_adoption_case_distribution_donut",
+            "label": "Standards Adoption Case distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "standards_requirement_trend_line",
+            "label": "Standards Requirement trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "standards_requirement_volume_column",
+            "label": "Standards Requirement volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "standards_requirement_distribution_donut",
+            "label": "Standards Requirement distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Standards Participation reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "standards_participation",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "standards_participation",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "standards_participation",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "standards_participation",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "standards_participation",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Standards Participation Overview",
+        "report_type": "dashboard_summary",
+        "surface": "module"
+      },
+      {
+        "id": "trend_report",
+        "label": "Standards Participation Trends",
+        "report_type": "trend_analysis",
+        "surface": "module"
+      },
+      {
+        "id": "summary_report",
+        "label": "Control Mapping Record Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Control Mapping Record Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "standards_participation_trend_line",
+        "label": "Standards Participation trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "standards_participation_volume_column",
+        "label": "Standards Participation volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "standards_participation_distribution_donut",
+        "label": "Standards Participation distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "control_mapping_record_trend_line",
+        "label": "Control Mapping Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "control_mapping_record_volume_column",
+        "label": "Control Mapping Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "control_mapping_record_distribution_donut",
+        "label": "Control Mapping Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "standards_adoption_case_trend_line",
+        "label": "Standards Adoption Case trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "standards_adoption_case_volume_column",
+        "label": "Standards Adoption Case volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "standards_adoption_case_distribution_donut",
+        "label": "Standards Adoption Case distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "standards_requirement_trend_line",
+        "label": "Standards Requirement trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "standards_requirement_volume_column",
+        "label": "Standards Requirement volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "standards_requirement_distribution_donut",
+        "label": "Standards Requirement distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "control_mapping_record",
+        "title": "Control Mapping Record",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "standards_adoption_case",
+        "title": "Standards Adoption Case",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "standards_requirement",
+        "title": "Standards Requirement",
+        "surface": null,
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "standards_requirement",
+      "standards_adoption_case",
+      "policy_document",
+      "compliance_record",
+      "control_mapping_record",
+      "certification_record"
+    ],
+    "upstream_docs": [
+      "standards_requirement",
+      "standards_adoption_case",
+      "policy_document",
+      "compliance_record",
+      "control_mapping_record",
+      "certification_record"
+    ],
+    "downstream_docs": [
+      "compliance_record",
+      "control_mapping_record"
+    ],
+    "actors": [
+      "compliance officer",
+      "case owner"
+    ],
+    "downstream_effects": [],
+    "emits_records": [
+      {
+        "action_id": "confirm",
+        "target_doc": "compliance_record",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "activate",
+        "target_doc": "control_mapping_record",
+        "effect_type": "create_record"
+      }
+    ],
+    "handoff_targets": [
+      "standards_requirement",
+      "standards_adoption_case",
+      "policy_document",
+      "compliance_record",
+      "control_mapping_record",
+      "certification_record"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "control_mapping_record",
+        "target_doc": "standards_requirement",
+        "relation": "references"
+      },
+      {
+        "source_doc": "control_mapping_record",
+        "target_doc": "standards_adoption_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "control_mapping_record",
+        "target_doc": "policy_document",
+        "relation": "references"
+      },
+      {
+        "source_doc": "control_mapping_record",
+        "target_doc": "compliance_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "control_mapping_record",
+        "target_doc": "compliance_record",
+        "relation": "create_record",
+        "action_id": "confirm"
+      },
+      {
+        "source_doc": "standards_adoption_case",
+        "target_doc": "standards_requirement",
+        "relation": "references"
+      },
+      {
+        "source_doc": "standards_adoption_case",
+        "target_doc": "control_mapping_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "standards_adoption_case",
+        "target_doc": "certification_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "standards_requirement",
+        "target_doc": "standards_adoption_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "standards_requirement",
+        "target_doc": "control_mapping_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "standards_requirement",
+        "target_doc": "policy_document",
+        "relation": "references"
+      },
+      {
+        "source_doc": "standards_requirement",
+        "target_doc": "control_mapping_record",
+        "relation": "create_record",
+        "action_id": "activate"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "standards_requirement",
+          "kind": "doc"
+        },
+        {
+          "id": "standards_adoption_case",
+          "kind": "doc"
+        },
+        {
+          "id": "policy_document",
+          "kind": "doc"
+        },
+        {
+          "id": "compliance_record",
+          "kind": "doc"
+        },
+        {
+          "id": "control_mapping_record",
+          "kind": "doc"
+        },
+        {
+          "id": "certification_record",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "control_mapping_record",
+          "target_doc": "standards_requirement",
+          "relation": "references"
+        },
+        {
+          "source_doc": "control_mapping_record",
+          "target_doc": "standards_adoption_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "control_mapping_record",
+          "target_doc": "policy_document",
+          "relation": "references"
+        },
+        {
+          "source_doc": "control_mapping_record",
+          "target_doc": "compliance_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "control_mapping_record",
+          "target_doc": "compliance_record",
+          "relation": "create_record",
+          "action_id": "confirm"
+        },
+        {
+          "source_doc": "standards_adoption_case",
+          "target_doc": "standards_requirement",
+          "relation": "references"
+        },
+        {
+          "source_doc": "standards_adoption_case",
+          "target_doc": "control_mapping_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "standards_adoption_case",
+          "target_doc": "certification_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "standards_requirement",
+          "target_doc": "standards_adoption_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "standards_requirement",
+          "target_doc": "control_mapping_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "standards_requirement",
+          "target_doc": "policy_document",
+          "relation": "references"
+        },
+        {
+          "source_doc": "standards_requirement",
+          "target_doc": "control_mapping_record",
+          "relation": "create_record",
+          "action_id": "activate"
+        }
+      ]
+    }
+  },
+  "contract_version": 1
 }

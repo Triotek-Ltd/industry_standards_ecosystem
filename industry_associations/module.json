@@ -4,5 +4,501 @@
   "app_id": "industry_standards_ecosystem",
   "type": "module",
   "status": "draft",
-  "supports_submodules": true
+  "supports_submodules": true,
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "module",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "docs",
+      "flatten_submodules_in_ui": true
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Industry Associations KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "industry_associations",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Industry Associations summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "industry_associations",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Industry Associations charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "industry_associations",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "industry_associations_trend_line",
+            "label": "Industry Associations trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "industry_associations_volume_column",
+            "label": "Industry Associations volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "industry_associations_distribution_donut",
+            "label": "Industry Associations distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "association_membership_trend_line",
+            "label": "Association Membership trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "association_membership_volume_column",
+            "label": "Association Membership volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "association_membership_distribution_donut",
+            "label": "Association Membership distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "membership_obligation_trend_line",
+            "label": "Membership Obligation trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "membership_obligation_volume_column",
+            "label": "Membership Obligation volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "membership_obligation_distribution_donut",
+            "label": "Membership Obligation distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "participation_event_trend_line",
+            "label": "Participation Event trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "participation_event_volume_column",
+            "label": "Participation Event volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "participation_event_distribution_donut",
+            "label": "Participation Event distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Industry Associations reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "industry_associations",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "industry_associations",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "industry_associations",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "industry_associations",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "industry_associations",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Industry Associations Overview",
+        "report_type": "dashboard_summary",
+        "surface": "module"
+      },
+      {
+        "id": "trend_report",
+        "label": "Industry Associations Trends",
+        "report_type": "trend_analysis",
+        "surface": "module"
+      },
+      {
+        "id": "summary_report",
+        "label": "Association Membership Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Association Membership Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "industry_associations_trend_line",
+        "label": "Industry Associations trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "industry_associations_volume_column",
+        "label": "Industry Associations volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "industry_associations_distribution_donut",
+        "label": "Industry Associations distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "association_membership_trend_line",
+        "label": "Association Membership trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "association_membership_volume_column",
+        "label": "Association Membership volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "association_membership_distribution_donut",
+        "label": "Association Membership distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "membership_obligation_trend_line",
+        "label": "Membership Obligation trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "membership_obligation_volume_column",
+        "label": "Membership Obligation volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "membership_obligation_distribution_donut",
+        "label": "Membership Obligation distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "participation_event_trend_line",
+        "label": "Participation Event trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "participation_event_volume_column",
+        "label": "Participation Event volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "participation_event_distribution_donut",
+        "label": "Participation Event distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "association_membership",
+        "title": "Association Membership",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "membership_obligation",
+        "title": "Membership Obligation",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "participation_event",
+        "title": "Participation Event",
+        "surface": null,
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "membership_obligation",
+      "participation_event",
+      "association_membership",
+      "government_report"
+    ],
+    "upstream_docs": [
+      "membership_obligation",
+      "participation_event",
+      "association_membership",
+      "government_report"
+    ],
+    "downstream_docs": [],
+    "actors": [],
+    "downstream_effects": [],
+    "emits_records": [],
+    "handoff_targets": [
+      "membership_obligation",
+      "participation_event",
+      "association_membership",
+      "government_report"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "association_membership",
+        "target_doc": "membership_obligation",
+        "relation": "references"
+      },
+      {
+        "source_doc": "association_membership",
+        "target_doc": "participation_event",
+        "relation": "references"
+      },
+      {
+        "source_doc": "membership_obligation",
+        "target_doc": "association_membership",
+        "relation": "references"
+      },
+      {
+        "source_doc": "membership_obligation",
+        "target_doc": "participation_event",
+        "relation": "references"
+      },
+      {
+        "source_doc": "membership_obligation",
+        "target_doc": "government_report",
+        "relation": "references"
+      },
+      {
+        "source_doc": "participation_event",
+        "target_doc": "association_membership",
+        "relation": "references"
+      },
+      {
+        "source_doc": "participation_event",
+        "target_doc": "membership_obligation",
+        "relation": "references"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "membership_obligation",
+          "kind": "doc"
+        },
+        {
+          "id": "participation_event",
+          "kind": "doc"
+        },
+        {
+          "id": "association_membership",
+          "kind": "doc"
+        },
+        {
+          "id": "government_report",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "association_membership",
+          "target_doc": "membership_obligation",
+          "relation": "references"
+        },
+        {
+          "source_doc": "association_membership",
+          "target_doc": "participation_event",
+          "relation": "references"
+        },
+        {
+          "source_doc": "membership_obligation",
+          "target_doc": "association_membership",
+          "relation": "references"
+        },
+        {
+          "source_doc": "membership_obligation",
+          "target_doc": "participation_event",
+          "relation": "references"
+        },
+        {
+          "source_doc": "membership_obligation",
+          "target_doc": "government_report",
+          "relation": "references"
+        },
+        {
+          "source_doc": "participation_event",
+          "target_doc": "association_membership",
+          "relation": "references"
+        },
+        {
+          "source_doc": "participation_event",
+          "target_doc": "membership_obligation",
+          "relation": "references"
+        }
+      ]
+    }
+  },
+  "contract_version": 1
 }

@@ -6,7 +6,7 @@ from core.services.relation_resolution import RelationResolutionService
 
 
 DOC_ID = "standards_adoption_case"
-RELATED_DOCS = [{'doc_id': 'standards_requirement', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'control_mapping_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'certification_record', 'relation_type': 'related', 'show_in_related_panel': True}]
+RELATED_DOCS = [{'doc_id': 'standards_requirement', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'control_mapping_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'certification_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'employee_record', 'relation_type': 'related', 'show_in_related_panel': True}]
 FETCH_RULES = []
 
 BORROWED_FIELDS = [{'description': 'requirement identity'}, {'description': 'applicability from standards_requirement'}]

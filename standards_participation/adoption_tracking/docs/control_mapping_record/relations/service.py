@@ -6,10 +6,10 @@ from core.services.relation_resolution import RelationResolutionService
 
 
 DOC_ID = "control_mapping_record"
-RELATED_DOCS = [{'doc_id': 'standards_requirement', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'standards_adoption_case', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'policy_document', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'compliance_record', 'relation_type': 'related', 'show_in_related_panel': True}]
-FETCH_RULES = []
+RELATED_DOCS = [{'doc_id': 'standards_requirement', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'standards_adoption_case', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'policy_document', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'compliance_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'party_record', 'relation_type': 'related', 'show_in_related_panel': True}]
+FETCH_RULES = [{'source_field': 'party', 'doc_id': 'party_record', 'mode': 'context'}]
 
-BORROWED_FIELDS = [{'description': 'requirement context from standards_requirement'}, {'description': 'control references from internal policy/compliance docs'}]
+BORROWED_FIELDS = [{'description': 'requirement context from standards_requirement'}, {'description': 'control references from internal policy/compliance docs'}, {'field_id': 'party', 'doc_id': 'party_record', 'description': 'Borrow context from party_record through party.'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

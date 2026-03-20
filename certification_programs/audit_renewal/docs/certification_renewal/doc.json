@@ -10,7 +10,8 @@
   "doc_archetype": "transaction",
   "classification": {
     "archetype": "transaction",
-    "bundle": "ecosystem"
+    "bundle": "ecosystem",
+    "doc_kind": "transaction"
   },
   "planning_source": {
     "type": "reference_doc_generation_manifest",
@@ -23,5 +24,260 @@
       "renewal package contents",
       "grace-period rules"
     ]
+  },
+  "ui": {
+    "icon_key": "receipt",
+    "accent": "#1f7a8c",
+    "logo_image": null,
+    "cover_image": null,
+    "preferred_views": [
+      "list",
+      "table",
+      "detail",
+      "report"
+    ],
+    "default_density": "comfortable"
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "doc",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "records",
+      "flatten_submodules_in_ui": false,
+      "views": [
+        "list",
+        "table",
+        "detail",
+        "report"
+      ]
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Certification Renewal KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "certification_renewal",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Certification Renewal summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "certification_renewal",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Certification Renewal charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "certification_renewal",
+          "metric_family": "trend"
+        }
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Certification Renewal reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "certification_renewal",
+          "metric_family": "reporting"
+        }
+      },
+      {
+        "id": "records",
+        "type": "record_table",
+        "title": "Certification Renewal records",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "doc",
+          "entity_id": "certification_renewal",
+          "metric_family": "records"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "certification_renewal",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "certification_renewal",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "certification_renewal",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "doc",
+        "entity_id": "certification_renewal",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Certification Renewal Overview",
+        "report_type": "dashboard_summary",
+        "surface": "doc"
+      },
+      {
+        "id": "trend_report",
+        "label": "Certification Renewal Trends",
+        "report_type": "trend_analysis",
+        "surface": "doc"
+      },
+      {
+        "id": "summary_report",
+        "label": "Certification Renewal Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Certification Renewal Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "supports_outputs": true,
+    "supports_print_formats": true,
+    "default_views": [
+      "summary",
+      "trend",
+      "report_table"
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "certification_renewal_trend_line",
+        "label": "Certification Renewal trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "certification_renewal_volume_column",
+        "label": "Certification Renewal volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "certification_renewal_distribution_donut",
+        "label": "Certification Renewal distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "certification_record",
+      "certification_audit_case",
+      "retention_policy"
+    ],
+    "upstream_docs": [
+      "certification_record",
+      "certification_audit_case"
+    ],
+    "downstream_docs": [
+      "certification_audit_case"
+    ],
+    "borrowed_fields": [
+      "certification",
+      "expiry context from certification_record"
+    ],
+    "emits_records": [
+      {
+        "action_id": "approve",
+        "target_doc": "certification_audit_case",
+        "effect_type": "create_record"
+      }
+    ],
+    "downstream_effects": [],
+    "actors": [
+      "auditor",
+      "case owner"
+    ],
+    "handoff_targets": [
+      "certification_record",
+      "certification_audit_case"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "certification_renewal",
+        "target_doc": "certification_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "certification_renewal",
+        "target_doc": "certification_audit_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "certification_renewal",
+        "target_doc": "certification_audit_case",
+        "relation": "create_record",
+        "action_id": "approve"
+      }
+    ]
+  },
+  "contract_version": 1,
+  "records_profile": {
+    "record_class": "business_record",
+    "legal_significance": "standard",
+    "confidentiality": "internal",
+    "official_copy_format": "pdf",
+    "evidence_gaps": []
   }
 }
